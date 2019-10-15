@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { BookDataService } from '../book-data.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 import { Book } from '../book';
-import { switchMap, map, take } from 'rxjs/operators';
-import { interval } from 'rxjs';
+import { BookDataService } from '../book-data.service';
 
 @Component({
   selector: 'me-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent implements OnInit {
+export class BookListComponent implements OnInit, OnDestroy {
   books: Book[];
+  private sub = Subscription.EMPTY;
 
   constructor(private bookData: BookDataService) {}
 
   ngOnInit() {
-    this.bookData
+    this.sub = this.bookData
       .getBooks()
       .pipe(
         switchMap((books: Book[]) =>
@@ -26,5 +27,9 @@ export class BookListComponent implements OnInit {
         )
       )
       .subscribe(books => (this.books = books));
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
