@@ -1,5 +1,13 @@
-<me-navigation></me-navigation> <me-books class="myclass"></me-books>
+<!-- <me-title-box></me-title-box>
+<me-title-box title="title 1"></me-title-box>
+<me-title-box [title]="'title 2'"></me-title-box> -->
+    <me-title-box
+(titleClicked)="onTitleClick($event)"
+[title]="appTitle"
+    ></me-title-box>
 
-<me-mouse-cursor></me-mouse-cursor>
+    <me-navigation></me-navigation> <me-books class="myclass"></me-books>
 
-<router-outlet></router-outlet>
+    <me-mouse-cursor></me-mouse-cursor>
+
+    <router-outlet></router-outlet>

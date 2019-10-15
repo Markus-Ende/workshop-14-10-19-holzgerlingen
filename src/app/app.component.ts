@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'workshop-holzgerlingen';
+  appTitle = 'workshop-holzgerlingen';
+
+  onTitleClick(event: string) {
+    this.appTitle = this.appTitle + '!';
+    console.log(event);
+  }
 }
