@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Book } from './book';
+import { of, Observable, interval, timer } from 'rxjs';
+import { switchMap, map, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +9,8 @@ import { Book } from './book';
 export class BookDataService {
   // private books = ...
 
-  getBooks(): Book[] {
-    return [
+  getBooks(): Observable<Book[]> {
+    return of([
       {
         title: 'Design Patterns',
         subtitle: 'Elements of Reusable Object-Oriented Software',
@@ -54,6 +56,13 @@ export class BookDataService {
           url: 'https://www.nostarch.com/'
         }
       }
-    ];
+    ]).pipe(
+      switchMap((books: Book[]) =>
+        interval(1000).pipe(
+          map(i => books.slice(0, i + 1)),
+          take(books.length)
+        )
+      )
+    );
   }
 }
