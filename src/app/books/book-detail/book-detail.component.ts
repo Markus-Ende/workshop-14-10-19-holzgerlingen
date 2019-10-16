@@ -13,6 +13,8 @@ import { BookDataService } from '../book-data.service';
 export class BookDetailComponent implements OnInit {
   public book$: Observable<Book>;
 
+  public readonly testString: string = 'Test';
+
   // private readonly subs = new Subscription();
   // subs.add(...)
 
