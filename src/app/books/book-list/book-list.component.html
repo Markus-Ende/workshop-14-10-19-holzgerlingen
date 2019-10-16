@@ -1,5 +1,5 @@
 <div *ngFor="let book of books$ | async">
-  Titel: {{ book.title }}
+  Titel: {{ book.title }} <a [routerLink]="book.isbn"> details</a>
   <hr />
 </div>
 <ng-content></ng-content>
