@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="title" /><br />
+  <div [hidden]="!form.get('title').hasError('required')">
+    Title is required
+  </div>
+
+  <input type="text" formControlName="author" /><br />
+  <div [hidden]="!form.get('author').hasError('required')">
+    Author is required
+  </div>
+
+  <button type="submit" [disabled]="!form.valid">submit</button>
+</form>
